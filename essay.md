@@ -1,4 +1,5 @@
 LINK: https://github.com/LosEvons/csb-project-1/
+
 The installation instructions are provided in the top-level README.
 For this project I am using the OWASP Top 10, 2021 edition.
 
@@ -33,13 +34,13 @@ https://github.com/LosEvons/csb-project-1/blob/347de52bbcf0c178309f03de320aa1723
 
 FLAW 4: Identification and authentication failures
 
-
-
-https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L94
-
-
+A failure in identification or authentication results from weak safeguards against identity theft and lacking session management. These failures come in many forms, such as permitting weak credentials. A failure of this kind can lead to an unintended information disclosure or fraudulent activity by an attacker on the account of the hijacked credentials. In this project a failure in authentication is demonstrated by allowing weak passwords, such as "1". The fix is quite simple: we enforce minimum requirements for passwords that guarantee relative safety against brute force attacks or just random lucky guesses.
+https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L94-L107
 
 FLAW 5: Security misconfiguration
+
+
+
 https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L26
 https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L31
 https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L34
