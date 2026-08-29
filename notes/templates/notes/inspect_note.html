@@ -5,6 +5,9 @@
     <title>Notes App</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
+        <p>Current user: {{ user.username }}</p>
+    {% endif %}
     <h1>{{ note.title }}</h1>
     <p>{{ note.content }}</p>
     <p> Owner: {{ note.owner }} </p>
