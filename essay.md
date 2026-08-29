@@ -39,8 +39,7 @@ https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ff
 
 FLAW 5: Security misconfiguration
 
-
-
+The security of an application can be misconfigured in a multitude of ways that weaken it against attacks or disclose information useful to an attacker. This can take the form of unnecessary features being enabled or installed in the system, security settings being configured too loosely, or error handling revealing stack traces with too much information. In this project a security misconfiguration is shown in three different ways. Firstly by having a secret key visible inside the codebase and committed publicly to version control, which means sensitive information is exposed. Secondly by having the DEBUG setting set to TRUE at all times, which reveals extensive stack traces with information about the program on errors. Thirdly the ALLOWED_HOSTS setting is set to a wildcard, which disables header validation.
 https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L26
 https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L31
 https://github.com/LosEvons/csb-project-1/blob/3f9c1a6a928233b37e7e3c46642fef9ffce36f30/config/settings.py#L34
