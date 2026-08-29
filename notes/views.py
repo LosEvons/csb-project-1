@@ -25,7 +25,7 @@ def search(request):
             # FIX:
             # c.execute(
             #     "SELECT id, title, content FROM notes_note WHERE title LIKE %s AND owner_id = %s",
-            #     [f"%{query}%", request.user.id]
+            #     [f"%{q}%", request.user.id]
             # )
             results = c.fetchall()
 
