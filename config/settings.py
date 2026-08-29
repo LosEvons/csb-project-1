@@ -30,7 +30,7 @@ DEBUG = True # FLAW! Security misconfiguration!
 # FIX: DEBUG = False
 
 ALLOWED_HOSTS = ["*"] # FLAW! Security misconfiguration!
-# FIX: ALLOWED_HOSTS = []
+# FIX: ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
