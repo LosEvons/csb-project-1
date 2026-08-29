@@ -20,8 +20,8 @@ def search(request):
     if q:
         with connection.cursor() as c:
             c.execute(
-                f"SELECT id, title, content FROM notes_note WHERE title LIKE '%{q}%'"
-            ) # FLAW! f-string allows for SQL injection through parameter!
+                f"SELECT id, title, content FROM notes_note WHERE title LIKE '%{q}%'" # FLAW! f-string allows for SQL injection through parameter!
+            ) 
             # FIX:
             # c.execute(
             #     "SELECT id, title, content FROM notes_note WHERE title LIKE %s AND owner_id = %s",
