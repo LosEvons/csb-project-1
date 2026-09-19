@@ -5,6 +5,7 @@
     <title>Notes App</title>
 </head>
 <body>
+    <p><a href="{% url 'notes:search' %}">Search</a></p>
     {% if user.is_authenticated %}
         <p>Current user: {{ user.username }}</p>
     {% endif %}

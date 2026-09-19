@@ -26,6 +26,9 @@ class Profile(models.Model):
         self.save()
         return new_token
 
-    # FIX for cryptographic failure through plaintext token
+    def verify_token(self, other_token):
+        return self.token == other_token # FLAW! Plaintext comparison of tokens
+
+    # FIX for cryptographic failure through plaintext token. Replace the verify_token function above with this:
     # def verify_token(self, other_token):
     #     return check_password(other_token, self.token)

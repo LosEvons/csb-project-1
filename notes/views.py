@@ -1,8 +1,13 @@
-from django.contrib.auth.decorators import login_required
-from django.db import connection
-from django.shortcuts import render, get_object_or_404
+import json
 
-from notes.models import Note
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.db import connection
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+
+from notes.models import Note, Profile
 
 
 # Create your views here.
@@ -30,3 +35,41 @@ def search(request):
             results = c.fetchall()
 
     return render(request, "notes/search.html", {"results": results, "q": q})
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect("notes:search")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/register.html", {"form": form})
+
+@login_required
+def profile(request):
+    p, _ = Profile.objects.get_or_create(user=request.user, defaults={"token": ""})
+    token = None
+    if request.method == "POST":
+        token = p.set_token()
+    return render(request, "notes/profile.html",
+                  {"has_token": bool(p.token), "new_token": token})
+
+def notes_api(request):
+    username, _, token = request.headers.get("Authorization", "").removeprefix("Token ").partition(":")
+    p = get_object_or_404(Profile, user__username=username)
+    if not p.verify_token(token):
+        return JsonResponse({"error": "bad token"}, status=403)
+    notes = Note.objects.filter(owner=p.user).values("id", "title", "content")
+    return JsonResponse({"notes": list(notes)})
+
+def create_note(request):
+    if request.method == "POST":
+        Note.objects.create(
+            owner=request.user,
+            title=request.POST.get("title", ""),
+            content=request.POST.get("content", ""),
+        )
+        return redirect("notes:search")
+    return render(request, "notes/create_note.html")

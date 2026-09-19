@@ -18,10 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from notes import views as note_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("notes/", include("notes.urls")),
+    path("accounts/register/", note_views.register, name="register"),
     path("accounts/", include("django.contrib.auth.urls")),
     path("", RedirectView.as_view(url="/notes/search/", permanent=False))
 ]

@@ -6,7 +6,7 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-        <p>Current user: {{ user.username }}</p>
+        <p>Current user: {{ user.username }} [<a href="{% url 'notes:profile' %}">Token</a>]</p>
     {% endif %}
     <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
@@ -16,7 +16,7 @@
         <input type="text" name="q" value="{{ q }}">
         <button type="submit">Search</button>
     </form>
-
+    <p><a href="{% url 'notes:create_note' %}">Create note</a></p>
     <ul>
         {% for id, title, content in results %}
             <li><a href="{% url 'notes:inspect_note' id %}">{{ title }}</a></li>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes App</title>
+</head>
+<body>
+    <p><a href="{% url 'notes:search' %}">Search</a></p>
+    <form method="post">
+        {% csrf_token %}
+        <p><input type="text" name="title" placeholder="title"></p>
+        <p><textarea name="content" placeholder="content"></textarea></p>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
